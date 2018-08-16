@@ -1,0 +1,26 @@
+# Each of these statements create a new FS layer.
+
+# This is the BASE image that OUR image is going to be built upon.
+FROM alpine
+
+# Use the package manager to install the tree command so that we can, in turn,
+# use it to inspect the filesystem "inside" the container.  Also deal with
+# setting the proper timezone.
+RUN apk --no-cache add tree linux-util tzdata; \
+  cp /usr/share/zoneinfo/America/New_York /etc/localtime; \
+  apk del tzdata
+
+# Create a sample directory and file.  Note one command, one layer.
+RUN mkdir /tmp/dir-0 && \
+    echo "This file was created by Dockerfile.0 at " $(date) > /tmp/dir-0/file-a
+
+# Be stupid and store a clear text password for everyone to steal.
+# Also, be aware this is created a new layer.  As a best practice, this
+# statement probably should have been combined with the previous RUN.
+RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
+
+# By default, run this command when a container is created from this
+# image.  This process will not stop until the container itself is killed.
+CMD ["top"]
+
+# The image built from this Dockerfile should be tagged as staranto/layer-0:latest.

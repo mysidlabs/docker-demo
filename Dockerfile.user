@@ -1,0 +1,28 @@
+FROM alpine
+
+# Running containers as root... or not.
+
+# As a general best practice, we don't want to be running containers as root.
+# Let's create a new user.
+RUN apk --no-cache add shadow && \
+    groupadd -g 888 appuser && \
+    useradd -r -u 888 -g appuser appuser && \
+    apk del shadow
+
+USER appuser
+
+# What's going to happen here?  How does it change depending on whom the user is?
+CMD ["ls", "-lta", "/root"]
+
+# The image built from this Dockerfile should be tagged as staranto/user:latest.
+
+# Run this twice.  With and without "--user root".
+
+# This demonstrates an operational horror with Linux's usage of numeric uid/guid
+# to identify users and groups.  What happens if containers based off of this
+# image are being orchestrated all around a cluster and they run into a node
+# that has "888" already in use?  You're stuck here.  You can try to auto-
+# assign the uid/gid but you'll still run the risk of collisions.  Or you can
+# accept whatever uid/gid may exist already and just run with that.  Dumb if you
+# do, though.  Even dumber - just run as root as a standard.  No simple,
+# comprehensible and globally applicable way to deal with this.
