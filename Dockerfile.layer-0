@@ -6,7 +6,7 @@ FROM alpine
 # Use the package manager to install the tree command so that we can, in turn,
 # use it to inspect the filesystem "inside" the container.  Also deal with
 # setting the proper timezone.
-RUN apk --no-cache add tree linux-util tzdata; \
+RUN apk --no-cache add tree util-linux tzdata; \
   cp /usr/share/zoneinfo/America/New_York /etc/localtime; \
   apk del tzdata
 
