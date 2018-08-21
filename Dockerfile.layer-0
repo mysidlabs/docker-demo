@@ -10,9 +10,11 @@ RUN mkdir /tmp/dir-0 && \
     echo "This file was created by Dockerfile.0 at " $(date) > /tmp/dir-0/file-a
 
 # Be stupid and store a clear text password for everyone to steal.
-# Also, be aware this is created a new layer.  As a best practice, this
+# Also, be aware this is creating a new layer.  As a best practice, this
 # statement probably should have been combined with the previous RUN.
 RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
+
+ENV TZ=EST5EDT
 
 CMD ["/tmp/app.sh", "0"]
 
