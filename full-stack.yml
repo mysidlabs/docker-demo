@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  layer-0:
+    image: staranto/layer-0:latest
+    networks: 
+      - net-layer-0
+    deploy:
+      replicas: 3
+
+  networks:
+    net-layer-0
