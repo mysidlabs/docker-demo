@@ -1,14 +1,9 @@
 # Each of these statements create a new FS layer.
 
 # This is the BASE image that OUR image is going to be built upon.
-FROM alpine
+FROM busybox
 
-# Use the package manager to install the tree command so that we can, in turn,
-# use it to inspect the filesystem "inside" the container.  Also deal with
-# setting the proper timezone.
-RUN apk --no-cache add tree util-linux tzdata; \
-  cp /usr/share/zoneinfo/America/New_York /etc/localtime; \
-  apk del tzdata
+COPY app.sh /tmp
 
 # Create a sample directory and file.  Note one command, one layer.
 RUN mkdir /tmp/dir-0 && \
@@ -19,8 +14,6 @@ RUN mkdir /tmp/dir-0 && \
 # statement probably should have been combined with the previous RUN.
 RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
 
-# By default, run this command when a container is created from this
-# image.  This process will not stop until the container itself is killed.
-CMD ["top"]
+CMD ["/tmp/app.sh", "0"]
 
 # The image built from this Dockerfile should be tagged as staranto/layer-0:latest.
