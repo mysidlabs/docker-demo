@@ -3,6 +3,7 @@
 # This is the BASE image that OUR image is going to be built upon.
 FROM busybox
 
+# Copy the "app" to the image.  This creates a new layer.
 COPY app.sh /tmp
 
 # Create a sample directory and file.  Note one command, one layer.
@@ -10,10 +11,12 @@ RUN mkdir /tmp/dir-0 && \
     echo "This file was created by Dockerfile.0 at " $(date) > /tmp/dir-0/file-a
 
 # Be stupid and store a clear text password for everyone to steal.
-# Also, be aware this is creating a new layer.  As a best practice, this
+# Also, this is creating a new layer.  As a best practice, this
 # statement probably should have been combined with the previous RUN.
 RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
 
+# Yet another layer.  Necessary evil different statements can't be combined.
+# Probably an anti-pattern to be setting TZ's anyway. 
 ENV TZ=EST5EDT
 
 CMD ["/tmp/app.sh", "0"]
