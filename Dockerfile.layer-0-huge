@@ -1,12 +1,13 @@
-FROM busybox
+FROM ubuntu
 
 COPY app.sh /tmp
 
 RUN mkdir /tmp/dir-0 && \
-    echo "This file was created by Dockerfile.layer-0 at " $(date) > /tmp/dir-0/file-a
+    echo "This file was created by Dockerfile.layer-0-huge at " $(date) > /tmp/dir-0/file-a
 
 RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
 
 ENV TZ=EST5EDT
 
 CMD ["watch", "uname", "-a"]
+

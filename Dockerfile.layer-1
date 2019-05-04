@@ -1,15 +1,8 @@
-# We're going to "layer onto" the first image that we created.
 FROM staranto/layer-0:latest
 
-# Add a new directory and file like we did in the original image.
-# Plus correct that author's stupidity and make sure the clear
-# text password is removed.
 RUN mkdir /tmp/dir-0/dir-1; \
-  echo "This file was created by Dockerfile.1 at " $(date) > /tmp/dir-0/dir-1/file-c; \
+  echo "This file was created by Dockerfile.layer-1 at " $(date) > /tmp/dir-0/dir-1/file-c; \
   rm /tmp/dir-0/super-secret-password.txt
 
-# Finally, run another lightweight, neverending command.  This will override the
-# commands specified in earlier layers.
 CMD ["watch", "ps", "aux"]
 
-# The image built from this Dockerfile should be tagged as staranto/layer-1:latest.

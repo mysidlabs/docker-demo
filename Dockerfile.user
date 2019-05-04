@@ -1,9 +1,5 @@
 FROM alpine
 
-# Running containers as root... or not.
-
-# As a general best practice, we don't want to be running containers as root.
-# Let's create a new user.
 RUN apk --no-cache add shadow && \
     groupadd -g 1000 appuser && \
     useradd -r -u 1000 -g appuser appuser && \
@@ -12,8 +8,6 @@ RUN apk --no-cache add shadow && \
 USER appuser
 
 CMD ["top"]
-
-# The image built from this Dockerfile should be tagged as staranto/user:latest.
 
 # Run this twice.  With and without "--user root".
 
