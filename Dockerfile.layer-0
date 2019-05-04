@@ -2,11 +2,8 @@ FROM busybox
 
 COPY app.sh /tmp
 
-RUN mkdir /tmp/dir-0 && \
-    echo "This file was created by Dockerfile.layer-0 at " $(date) > /tmp/dir-0/file-a
+RUN echo "This file was created by Dockerfile.layer-0 at " $(date) > /tmp/file-0
 
-RUN echo "Passw0rd!" >> /tmp/dir-0/super-secret-password.txt
-
-ENV TZ=EST5EDT
+RUN echo "Passw0rd!" >> /tmp/super-secret-password.txt
 
 CMD ["watch", "uname", "-a"]
