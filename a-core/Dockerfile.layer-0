@@ -1,6 +1,6 @@
 FROM busybox
 
-COPY app.sh /tmp
+COPY hello  /tmp
 
 RUN echo "This file was created by Dockerfile.layer-0 at " $(date) > /tmp/file-0
 

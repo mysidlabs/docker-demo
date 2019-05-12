@@ -1,4 +1,4 @@
-FROM alpine
+FROM openjdk
 
 COPY hello /
 
