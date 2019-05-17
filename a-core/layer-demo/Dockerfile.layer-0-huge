@@ -1,9 +1,0 @@
-FROM ubuntu
-
-COPY hello /tmp
-
-RUN echo "This file was created by Dockerfile.layer-0-huge at " $(date) > /tmp/file-0
-
-RUN echo "Passw0rd!" >> /tmp/super-secret-password.txt
-
-CMD ["watch", "uname", "-a"]

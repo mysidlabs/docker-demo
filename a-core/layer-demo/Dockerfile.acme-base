@@ -9,5 +9,3 @@ USER appuser
 
 CMD ["top"]
 
-# Run this twice.  With and without "--user root".
-

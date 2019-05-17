@@ -1,0 +1,6 @@
+FROM acme/dotnetcore-base:2.0.1
+
+COPY hello /
+
+CMD [ "/hello" ]
+

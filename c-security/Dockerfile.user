@@ -1,0 +1,11 @@
+FROM alpine
+
+RUN apk --no-cache add shadow && \
+    groupadd -g 6000 appuser && \
+    useradd -r -u 6000 -g appuser appuser && \
+    apk del shadow
+
+USER appuser
+
+CMD ["top"]
+
