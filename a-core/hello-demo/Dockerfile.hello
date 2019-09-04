@@ -1,6 +1,5 @@
-FROM acme/dotnetcore-base:2.0.1
+FROM alpine
 
-COPY hello /
+COPY hello.sh /
 
-CMD [ "/hello" ]
-
+ENTRYPOINT [ "/hello.sh" ]

@@ -1,11 +1,18 @@
 FROM alpine
 
+# The corporate standard is that all containerized
+# apps run as non-root.  This policy can be enforced
+# in several ways.  Create a non-root user for use
+# by all inheriting images.
 RUN apk --no-cache add shadow && \
     groupadd -g 1000 appuser && \
     useradd -r -u 1000 -g appuser appuser && \
     apk del shadow
 
+# Also apply corporate standard security policies.
+RUN rm /usr/bin/shred && \
+    rm /usr/bin/killall
+
 USER appuser
 
-CMD ["top"]
-
+CMD [ "tail", "-f", "/dev/null" ]

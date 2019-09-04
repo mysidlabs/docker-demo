@@ -1,6 +1,6 @@
 FROM staranto/layer-0:latest
 
-RUN echo "This file was created by Dockerfile.layer-1 at " $(date) > /tmp/file-1; \
+RUN echo "This file was created by Dockerfile.layer-1 at " $(date) > /tmp/layer-1; \
    rm /tmp/super-secret-password.txt
 
 CMD ["watch", "ps", "aux"]
