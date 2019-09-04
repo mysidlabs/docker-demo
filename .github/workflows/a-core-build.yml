@@ -9,8 +9,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-
-    - name: |
-        cd ./a-core/hello-demo
-        docker build --tag staranto/junk --file Dockerfile.hello .
+    - working-directory: ./a-core/hello-demo
+    - run: docker build --tag staranto/junk --file Dockerfile.hello .
 
