@@ -5,8 +5,8 @@ FROM alpine
 # in several ways.  Create a non-root user for use
 # by all inheriting images.
 RUN apk --no-cache add shadow && \
-    groupadd -g 1000 appuser && \
-    useradd -r -u 1000 -g appuser appuser && \
+    groupadd -g 1001 appuser && \
+    useradd -r -u 1001 -g appuser appuser && \
     apk del shadow
 
 # Also apply corporate standard security policies.
